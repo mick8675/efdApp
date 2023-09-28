@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="scriptConfig" class="com.solers.delivery.scripting.ScriptConfiguration">
+        <constructor-arg>
+            <list>
+                <bean class="com.solers.delivery.scripting.ScriptConfiguration$ScriptLanguage">
+                    <property name="language" value="JavaScript" />
+                    <property name="extensions" value="js" />
+                    <property name="description" value="Javascript" />
+                </bean>
+                <bean class="com.solers.delivery.scripting.ScriptConfiguration$ScriptLanguage">
+                    <property name="language" value="groovy" />
+                    <property name="extensions" value="groovy" />
+                    <property name="description" value="Groovy Script" />
+                </bean>
+                <bean class="com.solers.delivery.scripting.ScriptConfiguration$ScriptLanguage">
+                    <property name="language" value="jython" />
+                    <property name="extensions" value="py" />
+                    <property name="description" value="Python Script" />
+                </bean>                
+                <!--  Add language here && then add support jar files into library -->
+            </list>
+        </constructor-arg>
+        <constructor-arg value="JavaScript" /> <!--  default script language -->
+    </bean>
+
+    <bean id="eventConsumers" class="com.solers.delivery.scripting.event.MapEventConsumersImpl">
+    </bean>
+    
+    <bean id="blockingQueue" class="java.util.concurrent.LinkedBlockingQueue">
+        <constructor-arg value="${scripting.event.queue.size}"/>
+    </bean>
+    
+    <bean id="eventQueue" class="com.solers.delivery.scripting.event.EventQueueImpl">
+        <constructor-arg ref="blockingQueue"/>
+        <constructor-arg ref="eventConsumers"/>
+    </bean>
+    
+    <bean id="eventService" class="com.solers.delivery.scripting.service.EventServiceImpl">
+        <property name="eventQueue" ref="eventQueue"/>
+    </bean>
+    
+    <bean id="sslContext" class="com.solers.security.ssl.SSLContextCreator" scope="singleton" init-method="init">
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEY"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEYSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_TRUSTSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="${security.keystore}"/>
+        <constructor-arg value="${security.truststore}"/>
+        <constructor-arg ref="transportCipherSuites"/>
+        <constructor-arg value="true"/>
+        <constructor-arg value="${ssl.session.timeout}"/>
+        <!--constructor-arg>
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetClass"><value>com.solers.delivery.security.SecurityProviderUtil</value></property>
+                <property name="targetMethod"><value>getPRNG</value></property>
+            </bean>
+        </constructor-arg-->
+        <constructor-arg>
+            <bean class="com.solers.delivery.security.PRNGFactoryBean"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="scriptingRMIServer" class="org.springframework.remoting.rmi.RmiServiceExporter" depends-on="sslContext">
+        <property name="serviceName" value="EventService"/>
+        <property name="service" ref="eventService"/>
+        <property name="serviceInterface" value="com.solers.delivery.scripting.service.EventService"/>
+        <property name="registryPort" value="${scripting.rmi.registry.port}"/>
+        <property name="serverSocketFactory">
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetObject">
+   		            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                       <property name="targetClass"><value>javax.net.ssl.SSLContext</value></property>
+   				       <property name="targetMethod"><value>getDefault</value></property>
+ 	                </bean>
+                </property>
+                <property name="targetMethod"><value>getServerSocketFactory</value></property>
+            </bean>
+        </property>
+	    <property name="registryServerSocketFactory">
+	        <bean class="javax.rmi.ssl.SslRMIServerSocketFactory" />
+	    </property>
+	    <property name="clientSocketFactory">
+	        <bean class="javax.rmi.ssl.SslRMIClientSocketFactory" />
+	    </property>
+	    <property name="registryClientSocketFactory">
+	        <bean class="javax.rmi.ssl.SslRMIClientSocketFactory" />
+        </property>
+    </bean>
+
+    <bean id="scriptManager" class="com.solers.delivery.scripting.ScriptExecutionManager" init-method="init" destroy-method="shutdown">
+        <constructor-arg ref="scriptingTaskFactory" />
+        <constructor-arg value="${scripting.manager.pool.size}" /> 
+    </bean>
+
+    <bean id="scriptingTaskFactory" class="com.solers.delivery.scripting.ScriptExecutionTaskFactory" scope="singleton" >
+        <constructor-arg ref="eventQueue" />
+        <constructor-arg ref="eventConsumers" />
+    </bean>
+
+    <bean id="scriptingApplication" class="com.solers.delivery.scripting.ScriptingApplication">
+        <constructor-arg ref="scriptManager" />
+        <constructor-arg ref="scriptConfig" />            
+        <constructor-arg value="${scripting.directory.scan.interval.millis}" />
+        <constructor-arg value="${scripting.status.interval.millis}" />   
+    </bean>
+
+</beans>

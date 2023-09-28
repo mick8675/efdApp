@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+    default-destroy-method="destroy">
+    
+    <!-- Execute this first so if OCSP enable overrides default (false), it will still
+         be set as we expect it to be. -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+        <property name="targetMethod" value="setRevocationEnabled"/>
+        <property name="arguments">
+            <list>
+                <value>${certificateRevocation.enable}</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+       <property name="targetMethod" value="setOcspEnabled"/>
+       <property name="arguments">
+           <list>
+               <value>${ocsp.enable}</value>
+           </list>
+       </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+       <property name="targetMethod" value="setSecurityProperty"/>
+       <property name="arguments">
+           <list>
+               <value>ocsp.responderURL</value>
+               <value>${ocsp.responderURL}</value>
+           </list>
+       </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+       <property name="targetMethod" value="setSecurityProperty"/>
+       <property name="arguments">
+           <list>
+               <value>ocsp.responderCertSubjectName</value>
+               <value>${ocsp.responderCertSubjectName}</value>
+           </list>
+       </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+       <property name="targetMethod" value="setSecurityProperty"/>
+       <property name="arguments">
+           <list>
+               <value>ocsp.responderCertIssuerName</value>
+               <value>${ocsp.responderCertIssuerName}</value>
+           </list>
+       </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+       <property name="targetClass" value="com.solers.security.CRLConfigurator"/>
+       <property name="targetMethod" value="setSecurityProperty"/>
+       <property name="arguments">
+           <list>
+               <value>ocsp.responderCertSerialNumber</value>
+               <value>${ocsp.responderCertSerialNumber}</value>
+           </list>
+       </property>
+    </bean>
+</beans>

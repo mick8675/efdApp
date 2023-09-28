@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!-- Use the default build-in authentication manager -->
+    <!--security:authentication-manager alias="authenticationManager"/>
+    	<security:authentication-provider /-->
+    <!--authentication-manager>
+            <authentication-provider ref="authenticationManager" />
+    </authentication-manager-->
+     <security:authentication-manager id="authenticationManager" alias="authenticationManager">
+        <!-- Define authentication providers -->
+        <security:authentication-provider ref="daoAuthenticationProvider" />
+        <!-- Add more authentication providers if needed -->
+    </security:authentication-manager>
+
+    <!--security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
+        <security:concurrent-session-control max-sessions="1" exception-if-maximum-exceeded="true" />
+    </security:http-->
+    
+    <security:http auto-config="false" entry-point-ref="authenticationEntryPoint">
+    <security:session-management>
+        <security:concurrency-control max-sessions="1" expired-url="/" />
+    </security:session-management>
+</security:http>
+
+    
+    
+    <bean id="authenticationEntryPoint" class="com.solers.delivery.web.SessionTimeOutProcessing">
+        <property name="loginFormUrl" value="/index.xml" />
+    </bean>
+    
+    <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+        <property name="defaultFailureUrl" value="/index.xml" />
+    </bean>
+    
+    
+</beans>

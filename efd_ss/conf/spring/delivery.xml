@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
+    default-destroy-method="destroy">
+    
+    <!-- 
+    This needs to be instantiated first because other beans below
+    might be @AutoRegistered or use an @AutoRegister object.  
+    Is there a better way? 
+    -->
+    <bean class="com.solers.jmx.registry.AutoRegisterAspect" factory-method="aspectOf">
+        <property name="registrar" ref="mxbeanRegistrar"/>
+    </bean>
+    
+    <bean id="mxbeanRegistrar" class="com.solers.jmx.registry.MBeanRegistrar" scope="singleton">
+       <constructor-arg>
+           <bean class="java.lang.management.ManagementFactory" factory-method="getPlatformMBeanServer"/>
+       </constructor-arg>
+    </bean>
+    
+    <bean class="com.solers.jmx.LoggerServiceImpl"/>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.solers.delivery.inventory.InventoryFactory"/>
+        <property name="targetMethod" value="setSiteDirectory"/>
+        <property name="arguments">
+            <list>
+                <value>${site.directory}</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.solers.delivery.inventory.plugin.PluginLoader"/>
+        <property name="targetMethod" value="load"/>
+        <property name="arguments">
+            <list>
+                <value>${inventory.plugins.location}</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="compressionRules" class="com.solers.delivery.transport.http.client.util.CompressionRules">
+        <property name="compressibleExtensions" value="xml,txt,log,html,jsp,ppt,doc,xls,pst"/>
+        <property name="minimumFileSizeBytes" value="1200000000"/>
+    </bean>
+    
+    <!-- @autowired into TransferServiceImpl -->
+    <bean id="retryPolicy" class="com.solers.delivery.transport.http.client.retry.RetryPolicyLinearTime" scope="prototype" init-method="init">
+        <property name="maxTotalRetryTime" value="2"/>
+        <property name="maxTotalRetryTimeUnit" value="HOURS"/>
+    </bean>
+    
+    <!-- @configurable definition -->
+    <bean id="inventoryRetriever" class="com.solers.delivery.content.consumer.InventoryRetriever" scope="prototype">
+        <property name="numBackups" value="${consumer.inventory.backups}" />
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="jettyServerHTTP"/>
+        <property name="targetMethod" value="setHandler"/>
+        <property name="arguments">
+            <list>
+                <ref bean="jettyHandlers"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="unorderedInventoryComparer" class="com.solers.delivery.inventory.comparer.UnorderedInventoryComparer" scope="prototype">
+        <property name="heapSize" value="1000"/>
+    </bean>
+    
+    <bean id="fileBackedQueue" class="com.solers.delivery.util.FileBackedQueue" scope="prototype">
+        <constructor-arg value="5000" />
+        <constructor-arg value="2500" />
+        <constructor-arg value="${site.directory}/inventories/pagefiles" type="string" />
+    </bean>
+    
+    <bean id="contentService" class="com.solers.delivery.content.ContentServiceImpl" init-method="initialize" scope="singleton">
+        <constructor-arg ref="hibernateDaoFactory" />
+        <constructor-arg ref="supplierContentSetManager"/>
+        <constructor-arg ref="consumerContentSetManager"/>
+    </bean>
+    
+    <bean id="statusService" class="com.solers.delivery.management.StatusServiceImpl">
+        <constructor-arg ref="mxbeanRegistrar"/>
+        <property name="transferMonitor" ref="transferMonitor"/>
+    </bean>
+    
+    <bean id="allowedHostService" class="com.solers.delivery.content.AllowedHostServiceImpl" scope="singleton">
+        <constructor-arg ref="hibernateDaoFactory"/>
+        <constructor-arg ref="contentService"/>
+    </bean>
+    
+    <bean id="userService" class="com.solers.delivery.user.UserServiceImpl" scope="singleton">
+        <constructor-arg ref="hibernateDaoFactory"/>
+    </bean>
+    
+    <bean id="passwordService" class="com.solers.delivery.user.PasswordServiceImpl" scope="singleton">
+        <constructor-arg ref="hibernateDaoFactory"/>
+        <property name="passwordExpirationDays" value="${password.expiration.days}" />
+        <property name="passwordReuseCount" value="${password.reuse.count}" />
+        <property name="passwordLengthAdmin" value="${password.length.admin}" />
+        <property name="passwordLengthUser" value="${password.length.user}" />
+        <property name="userChangesInterval">
+            <bean class="com.solers.util.spring.TimeIntervalUnitFactoryBean">
+                <property name="sourceUnit" value="HOURS"/>
+                <property name="value" value="${password.change.period.hours.user}"/>
+            </bean>
+        </property>
+        <property name="maxUserChanges" value="${password.change.period.changes.user}" />
+    </bean>
+    
+    <bean id="schedulerFactory"
+          class="com.solers.delivery.content.scheduler.ContentSetSchedulerFactory"
+          scope="singleton">
+    </bean>
+    
+    <bean id="supplierContentSetManager" class="com.solers.delivery.content.supplier.SupplierContentSetManager" 
+          scope="singleton">
+          <constructor-arg ref="gbsSupplier" />
+          <constructor-arg ref="schedulerFactory" />
+    </bean>
+    
+    <bean id="consumerContentSetManager" class="com.solers.delivery.content.consumer.ConsumerContentSetManager" 
+          scope="singleton">
+          <constructor-arg ref="gbsPoller" />
+          <constructor-arg ref="schedulerFactory" />
+    </bean>
+    
+    <bean id="inventoryBundler" class="com.solers.delivery.inventory.InventoryBundler" scope="prototype">
+        <property name="numInventoryBackups" value="${supplier.inventory.backups}"/>
+    </bean>
+    
+    <security:authentication-manager alias="authenticationManager"/>
+      
+    <bean id="eventCleanupServiceScheduler"
+        class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="autoStartup">
+            <value>true</value>
+        </property>
+
+        <property name="waitForJobsToCompleteOnShutdown">
+            <value>true</value>
+        </property>
+        <property name="triggers">
+            <list>
+                <bean class="com.solers.delivery.content.scheduler.CronTrigger">
+                    <property name="jobDetail">
+                        <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                            <property name="targetObject">  
+                                <bean id="cleanupTask" class="com.solers.delivery.event.cleanup.LuceneEventCleanupTask">
+                                    <constructor-arg ref="luceneHelper"/>
+                                    <constructor-arg value="${cleanup.daysToKeepContentEvents}" />
+                                    <constructor-arg value="${cleanup.daysToKeepSyncEvents}" />
+                                </bean>
+                            </property>
+                            <property name="targetMethod">
+                                <value>run</value>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="cronExpression">
+                        <value>${cleanup.cron.schedule}</value>
+					</property>
+                </bean>
+                <bean class="com.solers.delivery.content.scheduler.CronTrigger">
+                    <property name="jobDetail">
+                        <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                            <property name="targetObject">  
+                                <bean class="com.solers.delivery.reports.metrics.MetricsTask">
+                                    <constructor-arg value="${metrics.directory}"/>
+                                    <constructor-arg ref="contentService" />
+                                    <constructor-arg ref="synchronizationHistory" />
+                                    <constructor-arg>
+                                        <bean class="com.solers.delivery.rest.RestfulService">
+                                            <constructor-arg value="https"/>
+                                            <constructor-arg value="${metrics.remote.server.host}"/>
+                                            <constructor-arg value="${metrics.remote.server.port}"/>
+                                        </bean>
+                                    </constructor-arg>
+                                    <constructor-arg value="${metrics.remote.enabled}"/>
+                                </bean>
+                            </property>
+                            <property name="targetMethod">
+                                <value>run</value>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="cronExpression">
+                        <value>${metrics.remote.cron}</value>
+                    </property>
+                </bean>
+                <bean class="com.solers.delivery.content.scheduler.CronTrigger">
+                    <property name="jobDetail">
+                        <bean class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+                            <property name="targetObject">  
+                                <bean class="com.solers.delivery.content.status.DiskSpaceAlertTask">
+                                    <constructor-arg ref="contentService" />
+                                    <constructor-arg ref="alertService" />
+                                    <constructor-arg value="${alerts.diskspace.threshold}" />
+                                    <constructor-arg value="${efd.home}" />
+                                </bean>
+                            </property>
+                            <property name="targetMethod">
+                                <value>run</value>
+                            </property>
+                        </bean>
+                    </property>
+                    <property name="cronExpression">
+                        <value>${alerts.diskspace.schedule}</value>
+                    </property>
+                </bean>
+            </list>
+        </property>
+    </bean>
+     
+    
+    <bean id="eventLockCleanup" class="com.solers.delivery.lucene.LuceneLockCleanupTask" init-method="run">
+        <constructor-arg ref="luceneHelper"/>
+    </bean>
+    
+    <bean id="transferMonitor" class="com.solers.delivery.transport.http.monitor.TransferMonitor" scope="singleton">
+        <property name="consumerManager" ref="consumerContentSetManager"/>
+        <property name="supplierManager" ref="supplierContentSetManager"/>
+        <property name="statusService" ref="statusService"/>
+    </bean>
+    
+    <bean class="com.solers.delivery.web.UserAuthenticationListener">
+        <property name="userService" ref="userService"/>
+        <property name="maxFailedPasswords" value="${password.max.failed}" />
+        <property name="alertManager" ref="alertManager"/>
+    </bean>
+    
+    <bean id="alertService" class="com.solers.delivery.alerts.AlertServiceImpl">
+        <constructor-arg ref="hibernateDaoFactory"/>
+    </bean>
+    
+    <bean id="alertManager" class="com.solers.delivery.alerts.AlertManager">
+        <constructor-arg>
+            <list>
+                <bean class="com.solers.delivery.alerts.listeners.DatabaseAlertListener">
+                    <constructor-arg ref="alertService"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <!-- 
+    Normally, we'd add this to the eventManager bean def but this listener
+    requires a ref to the contentService, which the -shared appContext (where eventManager
+    is defined) doesn't have access to.
+    -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetObject" ref="eventManager"/>
+        <property name="targetMethod" value="addListener"/>
+        <property name="arguments">
+            <list>
+                <bean class="com.solers.delivery.event.listener.FailedSynchronizationAlertPublisher">
+                    <constructor-arg ref="alertManager"/>
+                    <constructor-arg ref="contentService"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <!---deprecated trying to replace below bean id="daoAuthenticationProvider" class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+        <security:custom-authentication-provider />
+    </bean-->
+    
+     <bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService" ref="userDetailsService"/>
+        <property name="passwordEncoder" ref="passwordEncoder"/>
+       
+        
+    </bean>
+    
+    <security:authentication-manager id="authenticationManager" alias="authenticationManager">
+        
+        <security:authentication-provider ref="daoAuthenticationProvider" />
+        
+    </security:authentication-manager>
+    
+   
+    
+    <bean id="userDetailsService" class="com.solers.delivery.user.DefaultUserDetailsService">
+        <constructor-arg ref="userService" />
+        <constructor-arg ref="passwordService" /> 
+    </bean>
+    
+    <bean id="passwordEncoder" class="com.solers.delivery.util.password.UserPasswordEncoder" />
+    
+</beans>

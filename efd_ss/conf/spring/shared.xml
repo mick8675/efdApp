@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
+    default-destroy-method="destroy">
+    
+    <context:annotation-config/>
+    <context:spring-configured/>
+    
+    <bean id="auditLogger" class="com.solers.security.audit.AuditLogger" scope="singleton" />
+    <bean class="com.solers.delivery.management.startup.LifecycleLogger" scope="singleton" />
+    
+    <bean class="com.solers.security.audit.AuthenticationListener">
+        <property name="auditLogger" ref="auditLogger"/>
+    </bean>
+    
+    <!--bean id="connectorHelperList" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean class="com.solers.delivery.rest.connectors.SslClientHelper">
+                
+                    <constructor-arg><null/></constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean-->
+
+    <bean class="org.restlet.ext.spring.SpringComponent" lazy-init="true">
+	    <property name="clients">
+		    <bean class="com.solers.delivery.rest.connectors.ClientListFactoryBean">
+		        <property name="context" ref="application" />
+		    </bean>
+	    </property>
+	    <property name="servers">
+		    <list>
+		        <bean class="org.restlet.engine.connector.HttpServerHelper">
+		            <constructor-arg><null/></constructor-arg>
+		        </bean>
+		    </list>
+	    </property>
+	    <property name="authentications">
+		    <list>
+		        <bean class="org.restlet.engine.security.HttpBasicHelper"/>
+		    </list>
+	    </property>
+	</bean>
+    <!--bean class="org.restlet.engine.Engine">
+        <property name="registeredClients" ref="connectorHelperList" />
+        <property name="registeredServers">
+            <list>
+                <bean class="org.restlet.engine.http.StreamServerHelper">
+                    <constructor-arg>
+                        <null/>
+                    </constructor-arg>
+                </bean>
+            </list>
+        </property>
+        <property name="registeredAuthentications">
+            <list>
+                <bean class="org.restlet.engine.authentication.HttpBasicHelper"/>
+            </list>
+        </property>
+    </bean-->
+        
+    <bean id="eventManager" class="com.solers.delivery.event.EventManager" scope="singleton" lazy-init="true">
+        <constructor-arg>
+            <list>
+                <bean class="com.solers.delivery.event.listener.LuceneConsumerEventListener">
+                    <constructor-arg ref="luceneHelper"/>
+                    <constructor-arg value="${event.batchsize}" />
+                    <constructor-arg value="${event.flushtime}" />
+                </bean>
+                <bean class="com.solers.delivery.event.listener.LuceneConsumerGbsListener">
+                    <constructor-arg ref="luceneHelper"/>
+                    <constructor-arg value="${event.batchsize}" />
+                    <constructor-arg value="${event.flushtime}" />
+                </bean>
+                <bean class="com.solers.delivery.event.listener.LuceneSupplierEventListener">
+                    <constructor-arg ref="luceneHelper"/>
+                    <constructor-arg ref="synchronizationHistory"/>
+                    <constructor-arg value="${event.batchsize}" />
+                    <constructor-arg value="${event.flushtime}" />
+                </bean>
+                <bean class="com.solers.delivery.event.listener.EventLogger"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    
+    <!-- Prototype for creating a new supplier ContentSet object with default settings -->
+    <bean id="supplierPrototype"
+        class="com.solers.delivery.domain.ContentSet" scope="prototype">
+        <property name="supplier" value="true" />
+        <property name="enabled" value="false" />
+        <property name="supportsGbsTransport" value="false" />
+        <property name="inventoryInterval" value="1" />
+        <property name="inventoryIntervalUnit" value="HOURS" />
+    </bean>
+    
+    <!-- Prototype for creating a new ConsumerContentSet object with default settings -->
+    <bean id="consumerPrototype" parent="supplierPrototype" class="com.solers.delivery.domain.ConsumerContentSet" scope="prototype">
+        <property name="supplier" value="false" />
+        <property name="supplierPort" value="443" />
+        <property name="maxFileSize" value="8" />
+        <property name="maxFileSizeUnit" value="GIGABYTES" />
+        <property name="fileDeleteDelay" value="0" />
+        <property name="fileDeleteDelayUnit" value="MINUTES" />
+        <property name="concurrentTransfers" value="1"/>
+    </bean>
+    
+    <bean id="userPrototype" class="com.solers.delivery.domain.User" scope="prototype">
+        <property name="enabled" value="true" />
+        <property name="initialPassword" value="true" />
+        <property name="failedLogins" value="0" />
+    </bean>
+
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="securitymessages"/>
+    </bean>
+    
+    <bean id="luceneHelper" class="com.solers.delivery.lucene.LuceneHelper" lazy-init="true">
+        <constructor-arg value="${site.directory}"/>
+    </bean>
+    
+    <bean id="synchronizationHistory" class="com.solers.delivery.reports.history.LuceneSynchronizationHistory" lazy-init="true">
+        <constructor-arg ref="luceneHelper"/>
+    </bean>
+    
+    <bean id="adminConverter" class="com.solers.delivery.rest.converter.AdminConverter">
+        <constructor-arg ref="${password.provider.bean}"/>
+    </bean>
+    
+</beans>

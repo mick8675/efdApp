@@ -1,0 +1,428 @@
+28 Sep 15:39:48 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS Compliant Mode: true  Version: 6.2.1
+28 Sep 15:39:48 INFO main com.solers.delivery.security.SecurityProviderUtil - Running FIPS 140 self test...
+28 Sep 15:39:48 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS 140 self-test result: PASS
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:1  Name:JsafeJCE  Version:6.21  Class:com.rsa.jsafe.provider.JsafeJCE
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:2  Name:SUN  Version:1.8  Class:sun.security.provider.Sun
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:3  Name:SunRsaSign  Version:1.8  Class:sun.security.rsa.SunRsaSign
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:4  Name:SunEC  Version:1.8  Class:sun.security.ec.SunEC
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:5  Name:SunJSSE  Version:1.8  Class:com.sun.net.ssl.internal.ssl.Provider
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:6  Name:SunJCE  Version:1.8  Class:com.sun.crypto.provider.SunJCE
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:7  Name:SunJGSS  Version:1.8  Class:sun.security.jgss.SunProvider
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:8  Name:SunSASL  Version:1.8  Class:com.sun.security.sasl.Provider
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:9  Name:XMLDSig  Version:1.8  Class:org.jcp.xml.dsig.internal.dom.XMLDSigRI
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:10  Name:SunPCSC  Version:1.8  Class:sun.security.smartcardio.SunPCSC
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Default JVM Random Algorithm: DefaultRandom: CTRDRBG128
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Random Algorithm [getPRNG()]: CTRDRBG128  Seed bytes: 64
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Name [getProvider()]: JsafeJCE
+28 Sep 15:39:49 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS [inFIPS()] : true
+28 Sep 15:39:51 INFO main com.solers.security.password.PasswordReader - Reading password from stdin...
+28 Sep 15:39:51 INFO main com.solers.security.password.PasswordReader - Read password from stdin
+28 Sep 15:39:53 INFO main org.eclipse.jetty.util.log - Logging initialized @9550ms to org.eclipse.jetty.util.log.Slf4jLog
+28 Sep 15:39:53 INFO main org.eclipse.jetty.util.ssl.SslContextFactory - x509=X509@d1f74b8(1,h=[fedora],a=[],w=[]) for SSLContextCreator@41394595[provider=null,keyStore=file:///h/efd_ss/site/conf/security/portal_keystore.p12,trustStore=file:///h/efd_ss/site/conf/security/portal_truststore.jks]
+28 Sep 15:39:54 INFO main org.eclipse.jetty.server.Server - jetty-9.4.51.v20230217; built: 2023-02-17T08:19:37.309Z; git: b45c405e4544384de066f814ed42ae3dceacdd49; jvm 1.8.0_152-b16
+28 Sep 15:39:55 INFO main org.eclipse.jetty.webapp.StandardDescriptorProcessor - NO JSP Support for /, did not find org.eclipse.jetty.jsp.JettyJspServlet
+28 Sep 15:39:55 INFO main org.eclipse.jetty.server.session - DefaultSessionIdManager workerName=node0
+28 Sep 15:39:55 INFO main org.eclipse.jetty.server.session - No SessionScavenger set, using defaults
+28 Sep 15:39:55 INFO main org.eclipse.jetty.server.session - node0 Scavenging every 660000ms
+28 Sep 15:39:55 INFO main org.eclipse.jetty.server.handler.ContextHandler.ROOT - Initializing Spring root WebApplicationContext
+28 Sep 15:39:55 INFO main org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization started
+28 Sep 15:39:56 INFO main org.springframework.security.core.SpringSecurityCoreVersion - You are running with Spring Security Core 5.5.7
+28 Sep 15:39:56 INFO main org.springframework.security.config.SecurityNamespaceHandler - Spring Security 'config' module version is 5.5.7
+28 Sep 15:39:57 INFO main org.springframework.security.config.http.HttpSecurityBeanDefinitionParser - Checking sorted filter chain: [Root bean: class [org.springframework.security.web.context.SecurityContextPersistenceFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 200, Root bean: class [org.springframework.security.web.session.ConcurrentSessionFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 300, Root bean: class [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 400, Root bean: class [org.springframework.security.web.header.HeaderWriterFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 500, Root bean: class [org.springframework.security.web.csrf.CsrfFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 700, Root bean: class [org.springframework.security.web.savedrequest.RequestCacheAwareFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2100, Root bean: class [null]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=org.springframework.security.config.http.HttpConfigurationBuilder$SecurityContextHolderAwareRequestFilterBeanFactory#0; factoryMethodName=getBean; initMethodName=null; destroyMethodName=null, order = 2200, Root bean: class [org.springframework.security.web.authentication.AnonymousAuthenticationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2500, Root bean: class [org.springframework.security.web.session.SessionManagementFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2700, Root bean: class [org.springframework.security.web.access.ExceptionTranslationFilter]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null, order = 2800, <org.springframework.security.web.access.intercept.FilterSecurityInterceptor#0>, order = 2900]
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - inventory.plugins.location already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.enable already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.supply.interval.minutes already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - security.background.color already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.daysToKeepContentEvents already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.enabled already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - web.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - security.level already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.daysToKeepSyncEvents already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertSerialNumber already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - web.host already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.enabled already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.enable already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpclient.ssl already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertIssuerName already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.dynamic already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.server.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.crlStores already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.server.host already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - database.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.ssl already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - alerts.diskspace.threshold already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.active.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertSubjectName already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - scripting.engine.registry.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.cron.schedule already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - alerts.diskspace.schedule already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - transport.port already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - scripting.engine.enabled already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderURL already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.passive.ports already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - transport.host already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.archive.size.mb already defined in system properties, skipping
+28 Sep 15:39:58 INFO main com.solers.security.password.PasswordReader - Reading password from stdin...
+28 Sep 15:39:58 INFO main com.solers.security.password.PasswordReader - Read password from stdin
+28 Sep 15:39:59 INFO main org.eclipse.jetty.util.ssl.SslContextFactory - x509=X509@39c1fe0b(1,h=[fedora],a=[],w=[]) for SSLContextCreator@5ae95707[provider=null,keyStore=file:///h/efd_ss/site/conf/security/portal_keystore.p12,trustStore=file:///h/efd_ss/site/conf/security/portal_truststore.jks]
+28 Sep 15:39:59 ERROR main com.solers.delivery.StartWeb - Thu Sep 28 15:39:59 EDT 2023 Thread[main,5,main] java.lang.ClassNotFoundException: class com.solers.util.db.DerbyBean
+28 Sep 15:40:00 INFO main com.solers.util.db.DerbyBean - Derby listening on: 3306
+28 Sep 15:40:00 INFO derby.NetworkServerStarter com.solers.util.db.DerbyBean - Thu Sep 28 15:40:00 EDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept SSL connections with client authentication on port 3306
+28 Sep 15:40:00 ERROR derby.NetworkServerStarter com.solers.delivery.StartWeb - Thu Sep 28 15:40:00 EDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) started and ready to accept SSL connections with client authentication on port 3306
+28 Sep 15:40:00 INFO derby.NetworkServerStarter com.solers.util.db.DerbyBean - Thu Sep 28 15:40:00 EDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) Enabled Protocols are TLSv1, TLSv1.1, TLSv1.2
+28 Sep 15:40:00 ERROR derby.NetworkServerStarter com.solers.delivery.StartWeb - Thu Sep 28 15:40:00 EDT 2023 : Apache Derby Network Server - 10.14.2.0 - (1828579) Enabled Protocols are TLSv1, TLSv1.1, TLSv1.2
+28 Sep 15:40:02 WARN main org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator - HHH000181: No appropriate connection provider encountered, assuming application will be supplying connections
+28 Sep 15:40:02 WARN main org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.UnsupportedOperationException: The application must supply JDBC connections
+	at org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl.getConnection(UserSuppliedConnectionProviderImpl.java:44) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1073) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:572) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:1002) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:765) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:379) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1449) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1414) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:916) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:288) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:524) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.start(Server.java:423) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:110) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:387) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:707) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:198) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:144) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:95) ~[spring-context-5.3.27.jar:5.3.27]
+	at com.solers.delivery.StartWeb.start(StartWeb.java:39) ~[EFD-2.2-main.jar:?]
+	at com.solers.delivery.StartWeb.main(StartWeb.java:61) ~[EFD-2.2-main.jar:?]
+28 Sep 15:40:02 WARN main org.springframework.web.context.support.XmlWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'database' defined in URL [file:////h/efd_ss/conf/spring/db.xml]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+28 Sep 15:40:02 ERROR main org.springframework.web.context.ContextLoader - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'database' defined in URL [file:////h/efd_ss/conf/spring/db.xml]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1073) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:572) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:1002) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:765) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:379) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1449) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1414) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:916) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:288) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:524) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.start(Server.java:423) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:110) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:387) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:707) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:198) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:144) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:95) ~[spring-context-5.3.27.jar:5.3.27]
+	at com.solers.delivery.StartWeb.start(StartWeb.java:39) ~[EFD-2.2-main.jar:?]
+	at com.solers.delivery.StartWeb.main(StartWeb.java:61) ~[EFD-2.2-main.jar:?]
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	... 69 more
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	... 69 more
+28 Sep 15:40:02 WARN main org.eclipse.jetty.webapp.WebAppContext - Failed startup of context o.e.j.w.WebAppContext@2bffa76d{Enterprise File Delivery,/,file:///h/efd_ss/web/,UNAVAILABLE}{/h/efd_ss/web}
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'database' defined in URL [file:////h/efd_ss/conf/spring/db.xml]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:399) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:278) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:103) ~[spring-web-5.3.27.jar:5.3.27]
+	at org.eclipse.jetty.server.handler.ContextHandler.callContextInitialized(ContextHandler.java:1073) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.callContextInitialized(ServletContextHandler.java:572) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.contextInitialized(ContextHandler.java:1002) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletHandler.initialize(ServletHandler.java:765) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.startContext(ServletContextHandler.java:379) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startWebapp(WebAppContext.java:1449) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.startContext(WebAppContext.java:1414) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.ContextHandler.doStart(ContextHandler.java:916) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.servlet.ServletContextHandler.doStart(ServletContextHandler.java:288) ~[jetty-servlet-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.webapp.WebAppContext.doStart(WebAppContext.java:524) ~[jetty-webapp-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:117) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.start(ContainerLifeCycle.java:169) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.start(Server.java:423) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.ContainerLifeCycle.doStart(ContainerLifeCycle.java:110) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.handler.AbstractHandler.doStart(AbstractHandler.java:97) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.server.Server.doStart(Server.java:387) ~[jetty-server-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at org.eclipse.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:73) ~[jetty-util-9.4.51.v20230217.jar:9.4.51.v20230217]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:330) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:113) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveConstructorArguments(ConstructorResolver.java:707) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:198) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:144) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.ClassPathXmlApplicationContext.<init>(ClassPathXmlApplicationContext.java:95) ~[spring-context-5.3.27.jar:5.3.27]
+	at com.solers.delivery.StartWeb.start(StartWeb.java:39) ~[EFD-2.2-main.jar:?]
+	at com.solers.delivery.StartWeb.main(StartWeb.java:61) ~[EFD-2.2-main.jar:?]
+Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	... 69 more
+Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1930) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	... 69 more
+28 Sep 15:40:02 INFO main org.eclipse.jetty.server.Server - Started @18415ms
+28 Sep 15:40:02 INFO main com.solers.delivery.StartWeb - WebUI started
+28 Sep 15:48:36 INFO SpringContextShutdownHook org.eclipse.jetty.server.session - node0 Stopped scavenging
+28 Sep 15:48:36 INFO SpringContextShutdownHook org.eclipse.jetty.server.handler.ContextHandler - Stopped o.e.j.w.WebAppContext@2bffa76d{Enterprise File Delivery,/,null,STOPPED}{/h/efd_ss/web}

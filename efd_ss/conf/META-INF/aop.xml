@@ -1,0 +1,52 @@
+<!DOCTYPE aspectj PUBLIC
+  "-//AspectJ//DTD//EN"    "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+
+<aspectj>
+  <!--
+  Uncomment this is you need AOP logging 
+  <weaver options="-verbose -showWeaveInfo -XmessageHandlerClass:org.springframework.aop.aspectj.AspectJWeaverMessageHandler">
+  -->
+  <weaver options="-Xset:weaveJavaxPackages=true">
+    <include within="com.solers.delivery.util.FileBackedQueue"/>
+    <include within="com.solers.delivery.inventory.InventoryFactory"/>
+    <include within="com.solers.delivery.content.consumer.difference.Remover"/>
+    <include within="com.solers.delivery.content.consumer.difference.DifferenceGenerator"/>
+    <include within="com.solers.delivery.domain.User"/>
+    <include within="com.solers.delivery.user.PasswordServiceImpl"/>
+    <include within="com.solers.delivery.user.UserServiceImpl"/>
+    <include within="com.solers.delivery.content.ContentServiceImpl"/>
+    <include within="com.solers.delivery.domain.ContentSet"/>
+    <include within="com.solers.delivery.domain.ConsumerContentSet"/>
+    <include within="com.solers.delivery.transport.http.server.GbsHandler"/>
+    <include within="com.solers.delivery.content.consumer.InventoryRetriever"/>
+    <include within="com.solers.delivery.inventory.comparer.UnorderedInventoryComparer"/>
+    <include within="com.solers.delivery.transport.http.client.TransferServiceImpl"/>
+    <include within="com.solers.delivery.content.AllowedHostServiceImpl"/>
+    <include within="com.solers.delivery.content.consumer.SynchronizationTask"/>
+    <include within="com.solers.delivery.content.consumer.difference.Requester"/>
+    <include within="com.solers.delivery.inventory.InventoryBundler"/>
+    <include within="com.solers.delivery.content.supplier.SupplierTask"/>
+    <include within="com.solers.delivery.transport.http.client.retry.RetryPolicyLinearTime"/>
+    <include within="com.solers.jmx.MonitoredExecutorService"/>
+    <include within="com.solers.delivery.transport.gbs.poll.GbsPoller"/>
+    <include within="com.solers.jmx.LoggerServiceImpl"/>
+    <include within="com.solers.delivery.management.startup.LifecycleLogger"/>
+    <include within="com.solers.security.audit.AuditLogger"/>
+    <include within="com.solers.delivery.alerts.AlertServiceImpl"/>
+    <include within="com.solers.jmx.registry.AutoRegisterAspect"/>
+    <include within="com.solers.security.audit.AuditAspect"/>
+  </weaver>
+  <aspects>
+    <aspect name="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"/>
+    <include within="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"/>
+    
+    <aspect name="org.springframework.transaction.aspectj.AnnotationTransactionAspect"/>
+    <include within="org.springframework.transaction.aspectj.AnnotationTransactionAspect"/>
+    
+    <aspect name="com.solers.security.audit.AuditAspect"/>
+    <include within="com.solers.security.audit.AuditAspect"/>
+    
+    <aspect name="com.solers.jmx.registry.AutoRegisterAspect"/>
+    <include within="com.solers.jmx.registry.AutoRegisterAspect"/>
+  </aspects>
+</aspectj>

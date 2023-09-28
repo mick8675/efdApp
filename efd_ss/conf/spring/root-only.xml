@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sslContext" class="com.solers.security.ssl.SSLContextCreator" scope="singleton" lazy-init="false" init-method="init">
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEY"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEYSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_TRUSTSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="${security.keystore}"/>
+        <constructor-arg value="${security.truststore}"/>
+        <constructor-arg ref="transportCipherSuites"/>
+        <constructor-arg value="false"/>
+        <constructor-arg value="${ssl.session.timeout}"/>
+        <!--constructor-arg type="java.security.SecureRandom">
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetClass"><value>com.solers.delivery.security.SecurityProviderUtil</value></property>
+                <property name="targetMethod"><value>getPRNG</value></property>
+            </bean>
+        </constructor-arg-->
+        <!--constructor-arg>
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetClass"><value>com.solers.delivery.security.SecurityProviderUtil</value></property>
+                <property name="targetMethod"><value>getPRNG</value></property>
+            </bean>
+        </constructor-arg-->
+        <constructor-arg>
+                <bean class="com.solers.delivery.security.PRNGFactoryBean"/>
+        </constructor-arg>
+    </bean>
+    
+    <!--bean id="jettyServerHTTP" class="org.eclipse.jetty.server.Server" init-method="start" destroy-method="stop" scope="singleton">
+    <property name="stopAtShutdown" value="true"/>
+    
+    <property name="connectors">
+        <list>
+            <ref bean="sslConnectorHTTP" />
+        </list>
+    </property>
+</bean>
+
+            <bean id="sslConnectorHTTP" class="com.solers.security.jetty.SSLConnector">
+
+                <constructor-arg>
+                    <ref bean="jettyServerHTTP"/>
+                </constructor-arg>
+                <constructor-arg ref="sslContext"/>
+                <constructor-arg value="${transport.port}"/>
+                <property name="name" value="secure"/>
+                <property name="host" value="${transport.host}"/>
+                <property name="statsOn" value="true"/>
+                <property name="needClientAuth" value="true"/>
+            </bean-->
+    
+    <!--bean id="jettyServerHTTP" class="org.mortbay.jetty.Server" init-method="start" destroy-method="stop" scope="singleton">
+        <property name="sendServerVersion" value="false"/>
+        <property name="threadPool">
+            <bean class="org.mortbay.thread.QueuedThreadPool">
+                <property name="minThreads" value="5"/>
+                <property name="maxThreads" value="100"/>
+            </bean>
+        </property>
+        <property name="connectors">
+          <list>
+            <bean id="sslConnectorHTTP" class="com.solers.security.jetty.SSLConnector" scope="singleton" depends-on="sslContext">
+            	<property name="name" value="secure"/>
+                <property name="host" value="${transport.host}" />
+                <property name="port" value="${transport.port}" />
+                <property name="statsOn" value="true" />
+                <property name="needClientAuth" value="true"/>
+            </bean>
+          </list>
+        </property>
+    </bean-->
+    <!--bean id="jettyServerHTTP" class="org.eclipse.jetty.server.Server" init-method="start" destroy-method="stop" scope="singleton">
+    	<property name="sendServerVersion" value="false" />
+    	<property name="threadPool">
+        	<bean class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+            	<property name="minThreads" value="5" />
+            	<property name="maxThreads" value="100" />
+            </bean>
+        </property>
+        <property name="connectors">
+        	<array>
+            	<bean id="sslConnectorHTTP" class="com.solers.security.jetty.SSLConnector" scope="singleton">
+                	<property name="name" value="secure" />
+                	<property name="server" value="${transport.host}"  />
+                	<property name="port" value="${transport.port}" />
+                	<property name="statsOn" value="true" />
+                	<property name="needClientAuth" value="true" />
+                </bean>
+           </array>
+       </property>
+    </bean-->
+    
+    <bean id="sslConnectorHTTP" class="com.solers.security.jetty.SSLConnector" scope="singleton" depends-on="jettyServerHTTP">
+    <constructor-arg ref="jettyServerHTTP"/>
+    <constructor-arg ref="sslContext" />
+    <constructor-arg value="${transport.port}" />
+    <!--property name="server" value="${transport.host}" /-->
+    <property name="statsOn" value="true" />
+    
+</bean>
+
+    <bean id="jettyServerHTTP" class="org.eclipse.jetty.server.Server" init-method="start" destroy-method="stop" scope="singleton">
+    </bean>
+
+    <!--bean id="jettyServerHTTP" class="org.eclipse.jetty.server.Server" init-method="start" destroy-method="stop" scope="singleton">
+	    <property name="connectors">
+		<list>
+		    <ref bean="sslConnectorHTTP" />
+		</list>
+	    </property>
+    </bean-->
+
+
+    <bean id="gbsConfigurator" class="com.solers.delivery.transport.gbs.GBSConfigurator" scope="singleton">
+        <constructor-arg>
+            <props>
+                <prop key="user.name">efd</prop>
+                <prop key="user.dir">${gbs.ftpserver.directory}</prop>
+                <prop key="user.archive">${gbs.archive.download.directory}</prop>
+                <prop key="connection-config.anonymousLoginEnabled">false</prop>
+                <prop key="connection.port">${gbs.ftpserver.port}</prop>
+                <prop key="data-connection.idle-time">10</prop>
+                <prop key="data-connection.active.local-port">${gbs.ftpserver.active.port}</prop>
+                <prop key="data-connection.passive.ports">${gbs.ftpserver.passive.ports}</prop>
+                <prop key="data-connection.implicitSsl">true</prop>
+                <prop key="listener.implicitSsl">true</prop>
+            </props>
+        </constructor-arg>
+        <constructor-arg ref="${password.provider.bean}" />
+    </bean>
+    
+    <bean 
+        id="ftpServer" 
+        class="com.solers.delivery.transport.gbs.ftp.FTPServerWrapper"
+        init-method="start" 
+        scope="singleton" 
+        depends-on="sslContext">
+        <constructor-arg ref="gbsConfigurator" />
+        <constructor-arg value="${gbs.ftpserver.ssl}"/>           
+    </bean>
+    
+</beans>

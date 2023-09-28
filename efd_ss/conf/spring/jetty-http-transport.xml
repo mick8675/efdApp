@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="jettyHandlers" class="org.eclipse.jetty.server.handler.HandlerList" scope="singleton" init-method="start" destroy-method="stop">
+		<property name="handlers">
+			<list>
+				<ref bean="rootContext"/>
+				<ref bean="contentContext"/>
+				<ref bean="eventContext"/>
+				<ref bean="apiContext"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="rootContext" class="org.eclipse.jetty.server.handler.ContextHandler">
+	    <property name="contextPath" value="/"/>
+	    <property name="connectorNames" value="secure"/> 
+	    <property name="handler">
+		    <bean class="org.eclipse.jetty.server.handler.HandlerList" scope="singleton">
+        	    <property name="handlers">
+            	    <list>
+                	   	<ref bean="legacyHandler"/>
+                    </list>
+                </property>
+            </bean>
+		</property>
+	</bean>
+					
+	<bean id="contentContext" class="org.eclipse.jetty.server.handler.ContextHandler">
+		<property name="contextPath">
+			<util:constant static-field="com.solers.delivery.transport.http.HTTPContextPaths.CONTENT_CONTEXT_PATH"/>
+		</property>
+		<property name="connectorNames" value="secure"/>
+		<property name="handler">
+			<bean class="org.eclipse.jetty.server.handler.HandlerList" scope="singleton">
+				<property name="handlers">
+					<list>
+						<ref bean="legacyHandler"/>
+						
+						<bean class="com.solers.delivery.transport.http.server.ValidationHandler">
+                    		<property name="cm" ref="supplierContentSetManager" />
+                		</bean>
+                		<bean class="com.solers.delivery.transport.http.server.SynchronizationEventHandler">
+                    		<constructor-arg ref="eventManager"/>
+                    		<constructor-arg ref="transferMonitor"/>
+                    		<property name="cm" ref="supplierContentSetManager" />
+                		</bean>
+                
+		                <ref bean="gbsHandler" />
+                
+        		        <bean class="com.solers.delivery.transport.http.server.FileHandler">
+                		    <property name="cm" ref="supplierContentSetManager" />
+                    		<property name="eventMgr" ref="eventManager" />
+                    		<property name="transferMonitor" ref="transferMonitor" />
+                		</bean>
+						
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+					   
+	<bean id="eventContext" class="org.eclipse.jetty.server.handler.ContextHandler">
+		<property name="contextPath">
+			<util:constant static-field="com.solers.delivery.transport.http.HTTPContextPaths.EVENTS_CONTEXT_PATH"/>
+		</property>
+		<property name="connectorNames" value="secure"/>
+		<property name="handler">
+			<bean class="org.eclipse.jetty.server.handler.HandlerList" scope="singleton">
+				<property name="handlers">
+					<list>
+						<ref bean="legacyHandler"/>
+						<bean class="com.solers.delivery.transport.http.server.SynchronizationEventHandler">
+                    		<constructor-arg ref="eventManager"/>
+                    		<constructor-arg ref="transferMonitor"/>
+                    		<property name="cm" ref="supplierContentSetManager" />
+                		</bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="apiContext" class="org.eclipse.jetty.server.handler.ContextHandler">
+		<property name="contextPath">
+			<util:constant static-field="com.solers.delivery.transport.http.HTTPContextPaths.API_CONTEXT_PATH"/>
+		</property>
+		<property name="connectorNames" value="secure"/>
+		<property name="handler">
+			<bean class="org.eclipse.jetty.server.handler.HandlerList" scope="singleton">
+				<property name="handlers">
+					<list>
+                        <bean class="com.solers.delivery.rest.RestletJettyHandler">
+                            <constructor-arg ref="jettyApplication"/>
+                        </bean>
+					</list>
+				</property>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="legacyHandler" class="com.solers.delivery.transport.http.server.LegacyHandler" scope="singleton">
+		<property name="contentDispatch">
+			<bean class="org.eclipse.jetty.server.Dispatcher">
+				<constructor-arg><ref bean="contentContext"/></constructor-arg>
+				<constructor-arg value="content"></constructor-arg>
+			</bean>
+		</property>
+		<property name="eventDispatch">
+			<bean class="org.eclipse.jetty.server.Dispatcher">
+				<constructor-arg><ref bean="eventContext"/></constructor-arg>
+				<constructor-arg value="event"></constructor-arg>
+			</bean>
+		</property>
+	</bean>
+
+</beans>

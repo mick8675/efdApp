@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="scriptingEventListener" class="com.solers.delivery.event.listener.ScriptingEventListener">
+	    <constructor-arg>
+	        <props>
+	            <prop key="listenToConsumerSynchronizationEvents">true</prop>
+	            <prop key="listenToSupplierSynchronizationEvents">true</prop>
+	            <prop key="listenToReceivedContentEvents">true</prop>
+	            <prop key="listenToSuppliedContentEvents">true</prop>
+	        </props>
+	    </constructor-arg>
+	    
+	    <property name="eventService">
+	    	<bean id="eventService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+	        	<property name="serviceUrl" value="rmi://${scripting.rmi.host}:${scripting.rmi.registry.port}/EventService"/>
+        		<property name="serviceInterface" value="com.solers.delivery.scripting.service.EventService"/>
+        		<property name="refreshStubOnConnectFailure" value="true"/>
+        		<property name="lookupStubOnStartup" value="false"/>
+	    		<property name="registryClientSocketFactory">
+		        	<bean class="javax.rmi.ssl.SslRMIClientSocketFactory" />
+	    		</property>
+    		</bean>
+    	</property>
+	</bean>
+	
+	<!-- 
+    Normally, we'd add this to the eventManager bean def but we don't want this listener
+    in shared.xml (where eventManager is defined) as this is NOT used in the web app.
+    -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean" depends-on="eventManager">
+        <property name="targetObject" ref="eventManager"/>
+        <property name="targetMethod" value="addListener"/>
+        <property name="arguments">
+            <list>
+            	<ref local="scriptingEventListener"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>

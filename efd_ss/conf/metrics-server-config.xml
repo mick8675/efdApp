@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <bean id="sslContext" class="com.solers.security.ssl.SSLContextCreator" init-method="init">
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEY"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_KEYSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.PKI_TRUSTSTORE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg value="${security.keystore}"/>
+        <constructor-arg value="${security.truststore}"/>
+        <constructor-arg>
+            <set>
+                <value>TLS_RSA_WITH_AES_128_CBC_SHA</value>
+                <value>TLS_RSA_WITH_AES_256_CBC_SHA</value>
+                <value>SSL_RSA_WITH_3DES_EDE_CBC_SHA</value>
+            </set>
+        </constructor-arg>
+        <constructor-arg value="true"/>
+        <constructor-arg value="${ssl.session.timeout}"/>
+        <constructor-arg type="java.security.SecureRandom">
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+                <property name="targetClass"><value>com.solers.delivery.security.SecurityProviderUtil</value></property>
+                <property name="targetMethod"><value>getPRNG</value></property>
+            </bean>
+        </constructor-arg>
+    </bean>
+    
+    <bean class="org.restlet.ext.spring.SpringEngine">
+        <property name="registeredClients">
+            <list>
+                <bean class="com.solers.delivery.rest.connectors.SslClientHelper"/>
+            </list>
+        </property>
+        <property name="registeredServers">
+            <list>
+                <bean class="com.solers.delivery.rest.connectors.JettySslHelper"/>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="store" class="com.solers.delivery.reports.metrics.server.csv.CsvStore" scope="singleton">
+        <constructor-arg value="${metrics.directory}/csv"/>
+    </bean>
+    
+    <bean id="component" class="org.restlet.ext.spring.SpringComponent" init-method="start" destroy-method="stop">
+        <property name="defaultTarget" ref="application" />
+
+        <property name="server">
+            <bean class="org.restlet.ext.spring.SpringServer">
+                <constructor-arg value="https" />
+                <constructor-arg value="${metrics.server.port}" />
+            </bean>
+        </property>
+        
+        <property name="logService">
+            <bean class="org.restlet.service.LogService">
+                <constructor-arg value="false"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="application" class="org.restlet.Application">
+        <constructor-arg>
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+               <property name="targetObject">
+                   <bean class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+                       <property name="targetObject" ref="component"/>
+                       <property name="propertyPath" value="context"/>
+                   </bean>
+               </property>
+               <property name="targetMethod" value="createChildContext"/>
+            </bean>
+        </constructor-arg>
+        <property name="root">
+            
+            <bean class="org.restlet.ext.spring.SpringRouter">
+                <constructor-arg ref="application" />
+                <property name="attachments">
+                    <map>
+                        <entry key="/data">
+                            <ref local="dataRouter" />
+                        </entry>
+                    </map>
+                </property>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="dataRouter" class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+
+        <property name="attachments">
+            <map>
+                <entry key="/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="dataResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="dataResource" class="com.solers.delivery.reports.metrics.server.DataResource" scope="prototype">
+        <constructor-arg ref="store"/>
+    </bean>
+    
+</beans>

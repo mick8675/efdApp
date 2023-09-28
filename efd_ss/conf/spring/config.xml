@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:security="http://www.springframework.org/schema/security"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd"
+    default-destroy-method="destroy">
+        
+    <bean class="com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="order" value="0"/>
+        <property name="locations">
+            <list>
+                <value>classpath:efd.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="properties">
+            <props>
+                <prop key="site.directory">${efd.home}/site</prop>
+                <prop key="gbs.archive.download.directory">${site.directory}/archive/download</prop>
+                <prop key="gbs.archive.upload.directory">${site.directory}/archive/upload</prop>
+                <prop key="gbs.ftpserver.directory">${site.directory}/ftpserver</prop>
+                <prop key="security.directory">${site.directory}/conf/security</prop>
+                <prop key="security.keystore">${security.directory}/portal_keystore.p12</prop>
+                <prop key="security.truststore">${security.directory}/portal_truststore.jks</prop>
+                <prop key="beans.location">${efd.home}/conf/spring</prop>
+                <prop key="consumer.inventory.backups">5</prop>
+                <prop key="supplier.inventory.backups">5</prop>
+                <prop key="transport.host">0.0.0.0</prop>
+                <prop key="transport.port">443</prop>
+                <prop key="web.port">8443</prop>
+                <prop key="password.provider.bean">encryptedProperties</prop>
+                <prop key="rest.port">8002</prop>
+                <prop key="event.batchsize">100</prop>
+                <prop key="event.flushtime">60</prop>
+                <prop key="ssl.session.timeout">3600</prop>
+                <prop key="metrics.server.port">8306</prop>
+                <prop key="metrics.directory">${site.directory}/metrics</prop>
+                <prop key="metrics.remote.enabled">false</prop>
+                <prop key="metrics.remote.cron">0 0 * * * ?</prop>
+                <prop key="metrics.remote.server.host">localhost</prop>
+                <prop key="metrics.remote.server.port">${metrics.server.port}</prop>
+                <!--  for certificate revocation/OCSP configuration -->
+                <prop key="com.sun.net.ssl.checkRevocation">false</prop>
+                <prop key="ocsp.enable">false</prop>
+                <prop key="ocsp.responderURL"/>
+                <prop key="ocsp.responderCertSubjectName"/>
+                <prop key="ocsp.responderCertIssuerName"/>
+                <prop key="ocsp.responderCertSerialNumber"/>
+                
+                <prop key="scripting.rmi.host">localhost</prop>
+                <prop key="scripting.rmi.registry.port">${scripting.engine.registry.port}</prop>
+                <prop key="scripting.manager.pool.size">20</prop>
+                <prop key="scripting.directory.scan.interval.millis">5000</prop>
+                <prop key="scripting.status.interval.millis">300000</prop>
+                <prop key="scripting.event.queue.size">10000</prop>
+                <prop key="scripting.directory">scripts</prop>
+            </props>
+        </property>
+        <property name="locations">
+            <list>
+                <value>classpath:password.policy.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="com.solers.delivery.transport.gbs.GBSConfigurator"/>
+        <property name="targetMethod" value="setGBSEnabled"/>
+        <property name="arguments">
+            <list>
+                <value>${gbs.enabled}</value>
+            </list>
+        </property>
+    </bean>
+    
+    
+    
+    <bean id="scriptingDirectory" class="org.springframework.beans.PropertyValue">
+        <constructor-arg value="scriptingDirectory"/>
+        <constructor-arg value="${scripting.directory}"/>
+    </bean>
+    
+    <bean id="scriptingEnabled" class="java.lang.String">
+        <constructor-arg value="${scripting.engine.enabled}"/>
+    </bean>
+
+
+    <!--bean id="scriptingEnabled" class="org.springframework.beans.PropertyValue">
+        <constructor-arg value="scriptingEnabled"/>
+        <constructor-arg value="${scripting.engine.enabled}"/>
+    </bean-->
+    
+    
+    <bean id="encryptedProperties" class="com.solers.security.password.DefaultPasswordProvider" scope="singleton" init-method="initialize">
+        <constructor-arg name="file" value="${security.directory}/master_pwd.properties"  />
+    </bean>
+    
+    <bean id="nativeEncryptedProperties" class="com.solers.security.password.DPAPIPasswordProvider" lazy-init="true" scope="singleton" init-method="initialize">
+        <constructor-arg name="file" value="${security.directory}/master_pwd.properties" />
+    </bean>
+    <!--bean id="encryptedProperties" class="com.solers.security.password.DefaultPasswordProvider" lazy-init="true" scope="singleton" init-method="initialize">
+        <constructor-arg value="${security.directory}/master_pwd.properties" />
+    </bean>
+    
+    <bean id="nativeEncryptedProperties" class="com.solers.security.password.DPAPIPasswordProvider" lazy-init="true" scope="singleton" init-method="initialize">
+        <constructor-arg value="${security.directory}/master_pwd.properties" />
+    </bean-->
+    
+    <bean id="passwordProviderTest" class="com.solers.security.password.MapPasswordProvider" lazy-init="true" scope="singleton">
+        <constructor-arg>
+            <map>
+                <entry key="derbyKey" value="41ba6c532588f2b03497000f22a9d504c6b41ee180a65f2c875fad715417b6ea"/>
+            </map>
+        </constructor-arg>
+        <property name="defaultPassword" value="password"/>
+    </bean>
+    
+    <!--util:set id="transportCipherSuites" scope="singleton">
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_RSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_RSA_WITH_NULL_SHA256</value>
+    </util:set>
+    
+    <util:set id="webCipherSuites" scope="singleton">
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_RSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_RSA_WITH_NULL_SHA256</value>
+	</util:set-->
+    <util:set id="transportCipherSuites" scope="singleton">
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_RSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_RSA_WITH_NULL_SHA256</value>
+    </util:set>
+    
+    <util:set id="webCipherSuites" scope="singleton">
+		<value>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384</value>
+		<value>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA</value>
+		<value>TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_256_GCM_SHA384</value>
+		<value>TLS_RSA_WITH_AES_128_GCM_SHA256</value>
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA256</value>
+		<value>TLS_RSA_WITH_AES_256_CBC_SHA</value>
+		<value>TLS_RSA_WITH_AES_128_CBC_SHA</value>
+    </util:set>
+
+</beans>

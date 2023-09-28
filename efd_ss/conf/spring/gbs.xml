@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	default-destroy-method="destroy">
+
+	<bean id="gbsHandler"
+		class="com.solers.delivery.transport.http.server.GbsHandler"
+		init-method="init" scope="singleton">
+        <constructor-arg value="${gbs.enabled}" />
+		<constructor-arg ref="eventManager" />
+		<constructor-arg ref="supplierContentSetManager" />
+		<constructor-arg ref="gbsSupplier" />
+        <property name="transferMonitor" ref="transferMonitor" />
+	</bean>
+
+	<bean id="gbsSupplier"
+		class="com.solers.delivery.transport.gbs.push.GbsPusher"
+		init-method="init" scope="singleton" depends-on="sslContext,gbsConfigurator">
+        <constructor-arg value="${gbs.archive.size.mb}" /><!-- 100MB -->
+        <constructor-arg value="${gbs.supply.interval.minutes}" /><!-- 5 Minutes -->
+        <constructor-arg value="${gbs.archive.upload.directory}"/>
+        <constructor-arg value="${gbs.ftpclient.ssl}" /><!-- Is Secure Connection FTPS vs. FTP -->        
+	</bean>
+
+	<bean id="gbsPoller"
+		class="com.solers.delivery.transport.gbs.poll.GbsPoller"
+		init-method="start" scope="singleton" depends-on="gbsConfigurator">
+		<constructor-arg value="${gbs.archive.download.directory}" /><!-- directory to poll "/" -->
+		<constructor-arg>
+			<list>
+				<ref bean="gbsListener" />
+			</list>
+		</constructor-arg>
+		<constructor-arg value="3600000" /><!-- 10 seconds -->
+	</bean>
+
+	<bean id="gbsListener" class="com.solers.delivery.transport.gbs.poll.GbsPollListener" scope="singleton">
+        <constructor-arg ref="eventManager" />
+    </bean>
+</beans>

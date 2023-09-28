@@ -1,0 +1,192 @@
+28 Sep 15:39:51 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS Compliant Mode: true  Version: 6.2.1
+28 Sep 15:39:51 INFO main com.solers.delivery.security.SecurityProviderUtil - Running FIPS 140 self test...
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS 140 self-test result: PASS
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:1  Name:JsafeJCE  Version:6.21  Class:com.rsa.jsafe.provider.JsafeJCE
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:2  Name:SUN  Version:1.8  Class:sun.security.provider.Sun
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:3  Name:SunRsaSign  Version:1.8  Class:sun.security.rsa.SunRsaSign
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:4  Name:SunEC  Version:1.8  Class:sun.security.ec.SunEC
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:5  Name:SunJSSE  Version:1.8  Class:com.sun.net.ssl.internal.ssl.Provider
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:6  Name:SunJCE  Version:1.8  Class:com.sun.crypto.provider.SunJCE
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:7  Name:SunJGSS  Version:1.8  Class:sun.security.jgss.SunProvider
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:8  Name:SunSASL  Version:1.8  Class:com.sun.security.sasl.Provider
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:9  Name:XMLDSig  Version:1.8  Class:org.jcp.xml.dsig.internal.dom.XMLDSigRI
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Index:10  Name:SunPCSC  Version:1.8  Class:sun.security.smartcardio.SunPCSC
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Default JVM Random Algorithm: DefaultRandom: CTRDRBG128
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Random Algorithm [getPRNG()]: CTRDRBG128  Seed bytes: 64
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - Provider Name [getProvider()]: JsafeJCE
+28 Sep 15:39:52 INFO main com.solers.delivery.security.SecurityProviderUtil - FIPS [inFIPS()] : true
+28 Sep 15:39:55 INFO main com.solers.security.password.PasswordReader - Reading password from stdin...
+28 Sep 15:39:55 INFO main com.solers.security.password.PasswordReader - Read password from stdin
+28 Sep 15:39:57 INFO main org.eclipse.jetty.util.log - Logging initialized @14152ms to org.eclipse.jetty.util.log.Slf4jLog
+28 Sep 15:39:58 INFO main org.eclipse.jetty.util.ssl.SslContextFactory - x509=X509@408a247c(1,h=[fedora],a=[],w=[]) for SSLContextCreator@62a8fd44[provider=null,keyStore=file:///h/efd_ss/site/conf/security/portal_keystore.p12,trustStore=file:///h/efd_ss/site/conf/security/portal_truststore.jks]
+28 Sep 15:39:58 WARN main org.eclipse.jetty.util.ssl.SslContextFactory - No supported Cipher Suite from [TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384, TLS_DHE_RSA_WITH_AES_256_CBC_SHA256, TLS_DHE_DSS_WITH_AES_256_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDH_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_RSA_WITH_AES_256_CBC_SHA, TLS_DHE_DSS_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_RSA_WITH_AES_128_CBC_SHA256, TLS_DHE_DSS_WITH_AES_128_CBC_SHA256, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA, TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDH_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_RSA_WITH_AES_128_CBC_SHA, TLS_DHE_DSS_WITH_AES_128_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_ECDSA_WITH_AES_256_GCM_SHA384, TLS_ECDH_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_RSA_WITH_AES_256_GCM_SHA384, TLS_DHE_DSS_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_ECDSA_WITH_AES_128_GCM_SHA256, TLS_ECDH_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_RSA_WITH_AES_128_GCM_SHA256, TLS_DHE_DSS_WITH_AES_128_GCM_SHA256, TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA, SSL_RSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA, TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA, SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA, SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA, TLS_EMPTY_RENEGOTIATION_INFO_SCSV, TLS_DH_anon_WITH_AES_256_GCM_SHA384, TLS_DH_anon_WITH_AES_128_GCM_SHA256, TLS_DH_anon_WITH_AES_256_CBC_SHA256, TLS_ECDH_anon_WITH_AES_256_CBC_SHA, TLS_DH_anon_WITH_AES_256_CBC_SHA, TLS_DH_anon_WITH_AES_128_CBC_SHA256, TLS_ECDH_anon_WITH_AES_128_CBC_SHA, TLS_DH_anon_WITH_AES_128_CBC_SHA, TLS_ECDH_anon_WITH_3DES_EDE_CBC_SHA, SSL_DH_anon_WITH_3DES_EDE_CBC_SHA, SSL_RSA_WITH_DES_CBC_SHA, SSL_DHE_RSA_WITH_DES_CBC_SHA, SSL_DHE_DSS_WITH_DES_CBC_SHA, SSL_DH_anon_WITH_DES_CBC_SHA, SSL_RSA_EXPORT_WITH_DES40_CBC_SHA, SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA, SSL_DHE_DSS_EXPORT_WITH_DES40_CBC_SHA, SSL_DH_anon_EXPORT_WITH_DES40_CBC_SHA, TLS_RSA_WITH_NULL_SHA256, TLS_ECDHE_ECDSA_WITH_NULL_SHA, TLS_ECDHE_RSA_WITH_NULL_SHA, SSL_RSA_WITH_NULL_SHA, TLS_ECDH_ECDSA_WITH_NULL_SHA, TLS_ECDH_RSA_WITH_NULL_SHA, TLS_ECDH_anon_WITH_NULL_SHA, SSL_RSA_WITH_NULL_MD5, TLS_KRB5_WITH_3DES_EDE_CBC_SHA, TLS_KRB5_WITH_3DES_EDE_CBC_MD5, TLS_KRB5_WITH_DES_CBC_SHA, TLS_KRB5_WITH_DES_CBC_MD5, TLS_KRB5_EXPORT_WITH_DES_CBC_40_SHA, TLS_KRB5_EXPORT_WITH_DES_CBC_40_MD5]
+28 Sep 15:39:58 INFO main org.eclipse.jetty.server.Server - jetty-9.4.51.v20230217; built: 2023-02-17T08:19:37.309Z; git: b45c405e4544384de066f814ed42ae3dceacdd49; jvm 1.8.0_152-b16
+28 Sep 15:39:58 INFO main org.eclipse.jetty.server.Server - Started @15194ms
+28 Sep 15:39:59 INFO main com.solers.delivery.transport.gbs.ftp.FTPServerWrapper - FtpServer is not enabled
+28 Sep 15:39:59 INFO main com.solers.delivery.Start - 
+
+~~~~~~~~~~~~~~~mick test~~~~~~~~~
+scriptingEnabled=false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+28 Sep 15:40:00 INFO main org.springframework.security.core.SpringSecurityCoreVersion - You are running with Spring Security Core 5.5.7
+28 Sep 15:40:00 INFO main org.springframework.security.config.SecurityNamespaceHandler - Spring Security 'config' module version is 5.5.7
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - inventory.plugins.location already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.enable already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.supply.interval.minutes already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - security.background.color already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.daysToKeepContentEvents already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.enabled already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - web.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - security.level already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.daysToKeepSyncEvents already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertSerialNumber already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - web.host already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.enabled already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.enable already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpclient.ssl already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertIssuerName already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.dynamic already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.server.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - certificateRevocation.crlStores already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - metrics.remote.server.host already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - database.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.ssl already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - alerts.diskspace.threshold already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.active.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderCertSubjectName already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - scripting.engine.registry.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - cleanup.cron.schedule already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - alerts.diskspace.schedule already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - transport.port already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - scripting.engine.enabled already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - ocsp.responderURL already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.ftpserver.passive.ports already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - transport.host already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.util.spring.SystemPublishingPropertyPlaceholderConfigurer - gbs.archive.size.mb already defined in system properties, skipping
+28 Sep 15:40:03 INFO main com.solers.delivery.management.startup.LifecycleLogger - Started
+28 Sep 15:40:04 ERROR main com.solers.delivery.Start - Thu Sep 28 15:40:04 EDT 2023 Thread[main,5,main] java.lang.ClassNotFoundException: class com.solers.util.db.DerbyBean
+28 Sep 15:40:04 INFO main com.solers.util.db.DerbyBean - Derby listening on: 3306
+28 Sep 15:40:04 INFO derby.NetworkServerStarter com.solers.util.db.DerbyBean - Thu Sep 28 15:40:04 EDT 2023 : Could not listen on port 3306 on host 127.0.0.1:
+ java.net.BindException: Address already in use (Bind failed)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - Thu Sep 28 15:40:04 EDT 2023 : Could not listen on port 3306 on host 127.0.0.1:
+ java.net.BindException: Address already in use (Bind failed)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - An exception was thrown during network server startup. DRDA_ListenPort.S:Could not listen on port 3306 on host 127.0.0.1:
+ java.net.BindException: Address already in use (Bind failed)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - java.lang.reflect.InvocationTargetException
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at java.lang.reflect.Method.invoke(Method.java:498)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at org.apache.derby.iapi.jdbc.DRDAServerStarter.run(Unknown Source)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at java.lang.Thread.run(Thread.java:748)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - Caused by: java.lang.Exception: DRDA_ListenPort.S:Could not listen on port 3306 on host 127.0.0.1:
+ java.net.BindException: Address already in use (Bind failed)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at org.apache.derby.impl.drda.NetworkServerControlImpl.consolePropertyMessageWork(Unknown Source)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at org.apache.derby.impl.drda.NetworkServerControlImpl.consolePropertyMessage(Unknown Source)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - at org.apache.derby.impl.drda.NetworkServerControlImpl.blockingStart(Unknown Source)
+28 Sep 15:40:04 ERROR derby.NetworkServerStarter com.solers.delivery.Start - ... 6 more
+28 Sep 15:40:06 WARN main org.hibernate.engine.jdbc.connections.internal.ConnectionProviderInitiator - HHH000181: No appropriate connection provider encountered, assuming application will be supplying connections
+28 Sep 15:40:06 WARN main org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator - HHH000342: Could not obtain connection to query metadata
+java.lang.UnsupportedOperationException: The application must supply JDBC connections
+	at org.hibernate.engine.jdbc.connections.internal.UserSuppliedConnectionProviderImpl.getConnection(UserSuppliedConnectionProviderImpl.java:44) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess.obtainConnection(JdbcEnvironmentInitiator.java:180) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:68) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202) ~[hibernate-core-5.4.24.Final.jar:5.4.24.Final]
+	at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54) ~[EFD-2.2-util.jar:?]
+	at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50) ~[EFD-2.2-util.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$invokeCustomInitMethod$7(AbstractAutowireCapableBeanFactory.java:1920) ~[spring-beans-5.3.27.jar:5.3.27]
+	at java.security.AccessController.doPrivileged(Native Method) ~[?:1.8.0_152]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1919) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920) ~[spring-context-5.3.27.jar:5.3.27]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.27.jar:5.3.27]
+	at com.solers.delivery.Start.start(Start.java:146) ~[EFD-2.2-main.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_152]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_152]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_152]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_152]
+	at org.apache.commons.daemon.support.DaemonLoader.start(DaemonLoader.java:188) ~[commons-daemon-1.0.3.jar:1.0.3]
+28 Sep 15:40:06 WARN main org.springframework.context.support.ClassPathXmlApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'database' defined in class path resource [db.xml]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+28 Sep 15:40:06 INFO main com.solers.delivery.management.startup.LifecycleLogger - Stopped
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - java.lang.reflect.InvocationTargetException
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at java.lang.reflect.Method.invoke(Method.java:498)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.apache.commons.daemon.support.DaemonLoader.start(DaemonLoader.java:188)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'database' defined in class path resource [db.xml]: Invocation of init method failed; nested exception is org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:920)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at com.solers.delivery.Start.start(Start.java:146)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - ... 5 more
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:275)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:237)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.id.factory.internal.DefaultIdentifierGeneratorFactory.injectServices(DefaultIdentifierGeneratorFactory.java:152)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.injectDependencies(AbstractServiceRegistryImpl.java:286)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.initializeService(AbstractServiceRegistryImpl.java:243)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.getService(AbstractServiceRegistryImpl.java:214)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.internal.InFlightMetadataCollectorImpl.<init>(InFlightMetadataCollectorImpl.java:176)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.complete(MetadataBuildingProcess.java:118)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.model.process.spi.MetadataBuildingProcess.build(MetadataBuildingProcess.java:83)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:473)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.internal.MetadataBuilderImpl.build(MetadataBuilderImpl.java:84)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.MetadataSources.buildMetadata(MetadataSources.java:202)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at com.solers.util.db.action.HibernateUpdateAction.execute(HibernateUpdateAction.java:54)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at com.solers.util.db.DatabaseBean.start(DatabaseBean.java:50)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at java.lang.reflect.Method.invoke(Method.java:498)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.lambda$invokeCustomInitMethod$7(AbstractAutowireCapableBeanFactory.java:1920)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at java.security.AccessController.doPrivileged(Native Method)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeCustomInitMethod(AbstractAutowireCapableBeanFactory.java:1919)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1872)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - ... 15 more
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.determineDialect(DialectFactoryImpl.java:100)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.engine.jdbc.dialect.internal.DialectFactoryImpl.buildDialect(DialectFactoryImpl.java:54)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:137)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator.initiateService(JdbcEnvironmentInitiator.java:35)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.boot.registry.internal.StandardServiceRegistryImpl.initiateService(StandardServiceRegistryImpl.java:101)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - at org.hibernate.service.internal.AbstractServiceRegistryImpl.createService(AbstractServiceRegistryImpl.java:263)
+28 Sep 15:40:06 ERROR main com.solers.delivery.Start - ... 38 more

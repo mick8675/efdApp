@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+    default-destroy-method="destroy">
+    
+    <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
+   
+    <bean id="annotationTransactionAspect" factory-method="aspectOf" class="org.springframework.transaction.aspectj.AnnotationTransactionAspect" lazy-init="true">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+   
+    <bean id="hibernateDaoFactory" class="com.solers.delivery.daos.impl.HibernateDAOFactory" scope="singleton" lazy-init="true">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" lazy-init="true">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- deprecated trying bean below bean id="sessionFactory" class="org.springframework.orm.hibernate5.annotation.AnnotationSessionFactoryBean" scope="singleton" lazy-init="true">
+        <property name="annotatedClasses" ref="hibernateClasses"/>
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean -->
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean" scope="singleton" lazy-init="true">
+        <property name="annotatedClasses" ref="hibernateClasses"/>
+        <property name="hibernateProperties" ref="hibernateProperties"/>
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="properties">
+            <props>
+                <prop key="database.port">3306</prop>
+                <prop key="database.dir">${site.directory}/database</prop>
+                <prop key="jdbc.base.url">jdbc:derby://127.0.0.1:${database.port}/content_delivery</prop>
+                <prop key="jdbc.user">efd</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+    <bean id="database" class="com.solers.util.db.DerbyBean" init-method="start" destroy-method="stop" scope="singleton" depends-on="sslContext">
+        <constructor-arg value="${database.dir}/derby"/>
+        <constructor-arg value="${database.port}"/>
+        <constructor-arg value="${jdbc.user}"/>
+        <constructor-arg value="${jdbc.base.url}"/>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.ENCRYPTION"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.DATABASE"/>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.ROOT_DATABASE"/>
+            </bean>
+        </constructor-arg>
+        
+        <property name="actions">
+            <list>
+                <bean class="com.solers.util.db.action.HibernateUpdateAction">
+                    <property name="hibernateProperties" ref="hibernateProperties"/>
+                    <property name="hibernateClasses" ref="hibernateClasses"/>
+                </bean>
+                <bean class="com.solers.util.db.action.SqlChangesetAction">
+                    <property name="sqlConfig" value="${efd.home}/conf/db/sql.config"/>
+                    <property name="databaseDirectory" value="${database.dir}/derby"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" scope="singleton" destroy-method="close" depends-on="database">
+        <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver" />
+        <property name="jdbcUrl" value="${jdbc.base.url};ssl=peerAuthentication" />
+        <property name="user" value="${jdbc.user}" />
+        <property name="initialPoolSize" value="5" />
+        <property name="minPoolSize" value="5" />
+        <property name="maxPoolSize" value="25" />
+        <property name="idleConnectionTestPeriod" value="300" />
+        <property name="autoCommitOnClose" value="false" />
+        <property name="maxAdministrativeTaskTime" value="3600" />
+        <property name="password">
+            <bean class="com.solers.security.password.PasswordFactoryBean">
+                <property name="provider" ref="${password.provider.bean}"/>
+                <property name="enumKey" value="com.solers.delivery.security.PasswordType.DATABASE"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="hibernateProperties" class="java.util.Properties">
+        <constructor-arg>
+            <props>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.autocommit">false</prop>
+                <prop key="hibernate.connection.shutdown">true</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.DerbyTenSevenDialect</prop>
+                <prop key="hibernate.cache.use_second_level_cache">false</prop>
+                <prop key="hibernate.jdbc.batch_size">25</prop>
+                <prop key="hibernate.default_schema">efd</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="hibernateClasses" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <value>com.solers.delivery.domain.Alert</value>
+                <value>com.solers.delivery.domain.AllowedHost</value>
+                <value>com.solers.delivery.domain.ContentSet</value>
+                <value>com.solers.delivery.domain.ConsumerContentSet</value>
+                <value>com.solers.delivery.domain.FileFilter</value>
+                <value>com.solers.delivery.domain.ResourceParameter</value>
+                <value>com.solers.delivery.domain.PendingDelete</value> 
+                <value>com.solers.delivery.domain.FtpConnection</value>
+                <value>com.solers.delivery.domain.User</value>
+                <value>com.solers.delivery.domain.Password</value>
+                <value>com.solers.delivery.domain.ScheduleExpression</value>
+            </list>
+        </constructor-arg>
+    </bean>
+   
+ </beans>

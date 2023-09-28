@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+    default-destroy-method="destroy">
+    
+    <bean id="component"
+        class="org.restlet.ext.spring.SpringComponent" init-method="start" destroy-method="stop">
+        <property name="defaultTarget" ref="application" />
+
+        <property name="server">
+            <bean class="org.restlet.ext.spring.SpringServer">
+                <constructor-arg value="http" />
+                <constructor-arg value="${rest.port}" />
+            </bean>
+        </property>
+        
+        <property name="logService">
+            <bean class="org.restlet.service.LogService">
+                <constructor-arg value="false"/>
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="jettyApplication" class="org.restlet.Application">
+        <property name="root">
+            <bean class="com.solers.delivery.rest.ServerAgentFilter">
+                <property name="next">
+                    <bean class="org.restlet.ext.spring.SpringRouter">
+                        <constructor-arg ref="jettyApplication" />
+                        <property name="attachments">
+                            <map>
+                                <entry>
+                                    <key>
+                                        <util:constant static-field="com.solers.delivery.transport.http.HTTPContextPaths.API_CONTEXT_PATH"/>
+                                    </key>
+                                    <bean class="org.restlet.ext.spring.SpringRouter">
+                                        <constructor-arg ref="jettyApplication" />
+                                        <property name="attachments">
+                                            <map>
+                                                <entry key="/suppliers">
+                                                    <bean class="org.restlet.ext.spring.SpringRouter">
+                                                        <constructor-arg ref="jettyApplication" />
+                                                        <property name="attachments">
+                                                            <map>
+                                                                <entry key="/">
+                                                                    <bean class="org.restlet.ext.spring.SpringFinder">
+                                                                        <lookup-method name="createResource" bean="supplierListingResource" />
+                                                                    </bean>
+                                                                </entry>
+                                                            </map>
+                                                        </property>
+                                                    </bean>
+                                                </entry>
+                                            </map>
+                                        </property>
+                                    </bean>
+                                </entry>
+                            </map>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    
+
+    <bean id="application"
+        class="org.restlet.Application">
+        <constructor-arg>
+            <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+               <property name="targetObject">
+                   <bean class="org.springframework.beans.factory.config.PropertyPathFactoryBean">
+                       <property name="targetObject" ref="component"/>
+                       <property name="propertyPath" value="context"/>
+                   </bean>
+               </property>
+               <property name="targetMethod" value="createChildContext"/>
+            </bean>
+        </constructor-arg>
+        <property name="root">
+            <bean class="com.solers.delivery.rest.ServerAgentFilter">
+                <property name="next">
+                    <bean class="com.solers.delivery.rest.IpFilter">
+                        <constructor-arg>
+                            <list>
+                                <value>127.0.0.1</value>
+                            </list>
+                        </constructor-arg>
+                        <property name="next">
+                            <bean class="com.solers.delivery.rest.AcegiGuard">
+                                <constructor-arg ref="daoAuthenticationProvider"/>
+                                <property name="ignored">
+                                    <list>
+                                        <value>/admin/authenticate</value>
+                                    </list>
+                                </property>
+                                <property name="next">
+                                    <bean class="org.restlet.ext.spring.SpringRouter">
+                                        <constructor-arg ref="application" />
+                                        <property name="attachments">
+                                            <map>
+                                                <entry key="/content">
+                                                    <ref bean="contentRouter" />
+                                                </entry>
+                                                <entry key="/reports">
+                                                    <ref bean="reportRouter" />
+                                                </entry>
+                                                <entry key="/op">
+                                                    <ref bean="opRouter" />
+                                                </entry>
+                                                <entry key="/inventory">
+                                                    <ref bean="inventoryRouter"/>
+                                                </entry>
+                                                <entry key="/admin">
+                                                    <ref bean="adminRouter"/>
+                                                </entry>
+                                            </map>
+                                        </property>
+                                    </bean>
+                                </property>
+                            </bean>
+                        </property>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="contentRouter"
+        class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+
+        <property name="attachments">
+            <map>
+                <entry key="/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="listingResource" />
+                    </bean>
+                </entry>
+
+                <entry key="/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="contentSetResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="reportRouter"
+        class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+
+        <property name="attachments">
+            <map>
+                <entry key="/status/content/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="statusResource" />
+                    </bean>
+                </entry>
+                <entry key="/status/current">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="currentStatusResource" />
+                    </bean>
+                </entry>
+                <entry key="/history/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="historyResource" />
+                    </bean>
+                </entry>
+                <entry key="/history/{id}/details/{detailsId}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="historyDetailsResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="opRouter"
+        class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+
+        <property name="attachments">
+            <map>
+                <entry key="/enable/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="enableResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="inventoryRouter"
+        class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+        <property name="attachments">
+            <map>
+                <entry key="/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="inventoryResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="adminRouter"
+        class="org.restlet.ext.spring.SpringRouter">
+        <constructor-arg ref="application" />
+        <property name="attachments">
+            <map>
+                <entry key="/authenticate/{username}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="authResource" />
+                    </bean>
+                </entry>
+                <entry key="/user/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="userResource" />
+                    </bean>
+                </entry>
+                <entry key="/user/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="userResource" />
+                    </bean>
+                </entry>
+                <entry key="/user/enable/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="enableUserResource" />
+                    </bean>
+                </entry>
+                <entry key="/password/{username}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="passwordResource" />
+                    </bean>
+                </entry>
+                <entry key="/allowedHost/{alias}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="allowedHostResource" />
+                    </bean>
+                </entry>
+                <entry key="/allowedHost/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="allowedHostResource" />
+                    </bean>
+                </entry>
+                <entry key="/alerts/{id}">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="alertResource" />
+                    </bean>
+                </entry>
+                <entry key="/alerts/">
+                    <bean class="org.restlet.ext.spring.SpringFinder">
+                        <lookup-method name="createResource"
+                            bean="alertResource" />
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="listingResource"
+        class="com.solers.delivery.rest.content.ListingResource"
+        scope="prototype">
+        <constructor-arg ref="contentService" />
+    </bean>
+    
+    <bean id="contentSetResource"
+        class="com.solers.delivery.rest.content.ContentSetResource"
+        scope="prototype">
+        <constructor-arg ref="contentService" />
+    </bean>
+    
+    <bean id="statusResource"
+        class="com.solers.delivery.rest.reports.StatusResource"
+        scope="prototype">
+        <constructor-arg ref="statusService"/>
+        <constructor-arg ref="contentService" />
+    </bean>
+    
+    <bean id="currentStatusResource"
+        class="com.solers.delivery.rest.reports.CurrentStatusResource"
+        scope="prototype">
+        <constructor-arg ref="statusService"/>
+    </bean>
+    
+    <bean id="historyResource"
+        class="com.solers.delivery.rest.reports.HistoryResource"
+        scope="prototype">
+        <constructor-arg ref="contentService" />
+        <constructor-arg ref="synchronizationHistory" />
+    </bean>
+    
+    <bean id="historyDetailsResource"
+        class="com.solers.delivery.rest.reports.HistoryDetailsResource"
+        scope="prototype">
+        <constructor-arg ref="contentService" />
+        <constructor-arg ref="synchronizationHistory" />
+    </bean>
+    
+    <bean id="enableResource"
+        class="com.solers.delivery.rest.op.EnableResource"
+        scope="prototype">
+        <constructor-arg ref="contentService" />
+    </bean>
+    
+    <bean id="inventoryResource"
+        class="com.solers.delivery.rest.inventory.InventoryResource"
+        scope="prototype"/>
+    
+    <bean id="userResource"
+        class="com.solers.delivery.rest.admin.UserResource"
+        scope="prototype">
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="adminConverter"/>
+    </bean>
+    
+    <bean id="enableUserResource"
+        class="com.solers.delivery.rest.admin.EnableUserResource"
+        scope="prototype">
+        <constructor-arg ref="userService"/>
+    </bean>
+    
+    <bean id="passwordResource"
+        class="com.solers.delivery.rest.admin.PasswordResource"
+        scope="prototype">
+        <constructor-arg ref="passwordService"/>
+        <constructor-arg ref="userService"/>
+        <constructor-arg ref="adminConverter"/>
+    </bean>
+    
+    <bean id="allowedHostResource" class="com.solers.delivery.rest.admin.AllowedHostResource" scope="prototype">
+        <constructor-arg ref="allowedHostService"/>
+    </bean>
+    
+    <bean id="authResource" class="com.solers.delivery.rest.admin.AuthenticateResource" scope="prototype">
+        <constructor-arg ref="adminConverter"/>
+        <constructor-arg ref="authenticationManager"/>
+        <constructor-arg ref="passwordService"/>
+    </bean>
+    
+     <bean id="alertResource" class="com.solers.delivery.rest.admin.AlertResource" scope="prototype">
+        <constructor-arg ref="alertService"/>
+        <constructor-arg ref="adminConverter"/>
+    </bean>
+    
+    <bean id="supplierListingResource" class="com.solers.delivery.rest.content.SupplierListingResource" scope="prototype">
+        <constructor-arg ref="contentService" />
+        <constructor-arg ref="statusService"/>
+    </bean>
+    
+</beans>
